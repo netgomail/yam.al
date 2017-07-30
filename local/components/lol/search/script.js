@@ -24,6 +24,7 @@ function JCTitleSearch(arParams)
 	this.INPUT = null;
 	this.WAIT = null;
 
+// Comment
 	this.ShowResult = function(result)
 	{
 		if(BX.type.isString(result))
