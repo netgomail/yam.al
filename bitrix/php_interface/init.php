@@ -1,6 +1,21 @@
 <?
+//AddEventHandler("shs.parser", "parserBeforeAddElementCatalog", Array("BeforeAdd", "parserBeforeAddElementCatalogHandler"));
 AddEventHandler("shs.parser", "parserCatalogDetail", Array("AvitoImg", "parserCatalogDetailHandler"));
 AddEventHandler("shs.parser", "EndPars", Array("DelFiles", "EndParsHandler"));
+
+
+
+// class BeforeAdd 
+
+// {
+        
+//     function parserBeforeAddElementCatalogHandler(&$_this, &$el)
+//     {
+//         echo "<pre>";
+//         print_r($el);
+
+//     }
+// }
 
 
 class AvitoImg
@@ -42,12 +57,20 @@ class AvitoImg
             $arImg = CFile::MakeFileArray($uniqe);
             $arFields['PROPERTY_VALUES']['AVITO_PHONE']['n0'] = array("VALUE" => $arImg, "DESCRIPTION" => 'avito');
         }
-        if ($ID == '2') {
-            echo pq('.name')->find();
-            $arFields['PROPERTY_VALUES']['PRICE'] = array(
-              0 => array("VALUE"=>"значение","DESCRIPTION"=>"описание значения"),
-              1 => array("VALUE"=>"значение2","DESCRIPTION"=>"описание значения2") 
-            );  
+        if ($ID == '4') {
+            foreach (pq('.afisha-day') as $key => $li) {
+                $dates[$key]['VALUE'] = str_replace('-', '.', pq($li)->attr('data-date')) . ' 10:00:00';
+                $dates[$key]['DESCRIPTION'] = pq($li)->find('.dayname')->text();
+            }
+            $arFields['PROPERTY_VALUES']['TIME'] = $dates;
+
+            foreach (pq('.film-seances-item ') as $key => $li) {
+                $seances[$key]['VALUE'] = pq($li)->find('.seance')->text();
+                $seances[$key]['DESCRIPTION'] = pq($li)->find('.price-value')->text();
+            }
+            $arFields['PROPERTY_VALUES']['PRICE'] = $seances;
+            $arFields['DATE_ACTIVE_FROM'] = '18.07.2017';
+            //echo pq('.film-seances-item ');
             // echo "<pre>";
             // print_r($arFields);
         }
