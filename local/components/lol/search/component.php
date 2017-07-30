@@ -8,7 +8,7 @@ if(!IsModuleInstalled("search"))
 }
 
 $arResult["CATEGORIES"] = array();
-
+// Trim
 $query = ltrim($_POST["q"]);
 if(
 	!empty($query)
@@ -57,7 +57,7 @@ if(
 
 
 
-// 
+//
 $arResult["FORM_ACTION"] = htmlspecialcharsbx(str_replace("#SITE_DIR#", SITE_DIR, $arParams["PAGE"]));
 
 if (
@@ -81,4 +81,3 @@ else
 	CUtil::InitJSCore(array('ajax'));
 	$this->IncludeComponentTemplate();
 }
-
