@@ -63,6 +63,7 @@ $curPage = $APPLICATION->GetCurPage(true);
 				</div>
 			</div>
 			<div style="padding-top: 10rem; padding-left: 10rem">
+                sddf
 			<?$APPLICATION->IncludeComponent(
 							"lol:search", 
 							"", 
