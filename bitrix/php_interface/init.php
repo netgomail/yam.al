@@ -4,11 +4,11 @@ AddEventHandler("shs.parser", "parserCatalogDetail", Array("AvitoImg", "parserCa
 AddEventHandler("shs.parser", "EndPars", Array("DelFiles", "EndParsHandler"));
 
 
-//
-// class BeforeAdd 
+
+// class BeforeAdd
 
 // {
-        
+
 //     function parserBeforeAddElementCatalogHandler(&$_this, &$el)
 //     {
 //         echo "<pre>";
@@ -44,7 +44,7 @@ class AvitoImg
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://www.avito.ru/items/phone/".$id."?pkey=".$r);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.24 Safari/537.36');   
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.24 Safari/537.36');
             curl_setopt($ch, CURLOPT_REFERER, $arFields['LINK']);
             $html = curl_exec($ch);
             curl_close($ch);
@@ -74,6 +74,22 @@ class AvitoImg
             // echo "<pre>";
             // print_r($arFields);
         }
+        if ($ID == '5') {
+            echo pq();
+            foreach (pq('.weather-forecast--detailed') as $key => $tr) {
+                pq($tr)->find('.weather-forecast__item:eq(4)')->remove();
+                foreach (pq($tr)->find('.weather-forecast__item') as $item => $el) {
+                    $result[$key][] = pq($el)->find('.weather-forecast__value')->text();
+                }
+                //$result[] = pq($tr)->find('.weather-forecast__value')->text();
+                // $forecast[$key]['VALUE'] = pq($tr)->find('.weather-table__temperature-day')->text();
+                // $forecast[$key]['DESCRIPTION'] = pq($tr)->find('.weather-table__temperature-night')->text();
+            }
+            echo '<pre>';
+            print_r($result);
+            // $arFields['PROPERTY_VALUES']['WEATHER'] = $forecast;
+
+        }
         if ($ID == '3') {
             sleep(8);
             define('PATERN','~<a class="person-action button button-solid button-blue button-large action-link link action-show-number
@@ -87,7 +103,7 @@ class AvitoImg
 
             $link = $arFields['LINK'] . '/phone/' . $key . '?async';
             $ch = curl_init();
-            curl_setopt ($ch , CURLOPT_URL , $link);        
+            curl_setopt ($ch , CURLOPT_URL , $link);
             $headers = array(
                 'x-requested-with: XMLHttpRequest',
                 'accept: application/json, text/javascript, */*; q=0.01',
@@ -102,7 +118,7 @@ class AvitoImg
             echo "<pre>";
             print_r(json_decode($content, true));
         }
-        
+
     }
 }
 class DelFiles
