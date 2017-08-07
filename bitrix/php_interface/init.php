@@ -4,7 +4,7 @@ AddEventHandler("shs.parser", "parserCatalogDetail", Array("AvitoImg", "parserCa
 AddEventHandler("shs.parser", "EndPars", Array("DelFiles", "EndParsHandler"));
 
 
-
+//
 // class BeforeAdd 
 
 // {
